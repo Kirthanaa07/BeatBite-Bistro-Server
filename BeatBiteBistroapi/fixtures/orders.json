@@ -1,0 +1,41 @@
+[
+  {
+    "model": "BeatBiteBistroapi.order",
+    "pk": 1,
+    "fields": {
+      "order_date": "2024-01-08T12:30:00",
+      "payment_type": "Credit",
+      "order_type": "Call-in",
+      "tip_amount": 5.0,
+      "status": "Closed",
+      "customers": 2,
+      "uid": 2
+    }
+  },
+  {
+    "model": "BeatBiteBistroapi.order",
+    "pk": 2,
+    "fields": {
+      "order_date": "2024-01-08T18:45:00",
+      "payment_type": "Cash",
+      "order_type": "Walk-in",
+      "tip_amount": 0.0,
+      "status": "Open",
+      "customers": 1,
+      "uid": 1
+    }
+  },
+  {
+    "model": "BeatBiteBistroapi.order",
+    "pk": 3,
+    "fields": {
+      "order_date": "2024-01-09T08:15:00",
+      "payment_type": "Mobile",
+      "order_type": "Call-in",
+      "tip_amount": 8.5,
+      "status": "Closed",
+      "customers": 3,
+      "uid": 3
+    }
+  }
+]

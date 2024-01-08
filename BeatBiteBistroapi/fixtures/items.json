@@ -1,0 +1,26 @@
+[
+  {
+    "model": "BeatBiteBistroapi.item",
+    "pk": 1,
+    "fields": {
+      "name": "Margherita",
+      "price": 9.99
+    }
+  },
+  {
+    "model": "BeatBiteBistroapi.item",
+    "pk": 2,
+    "fields": {
+      "name": "Pepperoni",
+      "price": 12.50
+    }
+  },
+  {
+    "model": "BeatBiteBistroapi.item",
+    "pk": 3,
+    "fields": {
+      "name": "Vegetarian",
+      "price": 10.95
+    }
+  }
+]

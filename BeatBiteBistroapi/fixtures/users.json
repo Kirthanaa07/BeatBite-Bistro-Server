@@ -1,0 +1,23 @@
+[
+  {
+    "model": "BeatBiteBistroapi.user",
+    "pk": 1,
+    "fields": {
+      "uid": 1
+    }
+  },
+  {
+    "model": "BeatBiteBistroapi.user",
+    "pk": 2,
+    "fields": {
+      "uid": 2
+    }
+  },
+  {
+    "model": "BeatBiteBistroapi.user",
+    "pk": 3,
+    "fields": {
+      "uid": 3
+    }
+  }
+]
