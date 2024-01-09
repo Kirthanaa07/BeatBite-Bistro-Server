@@ -1,0 +1,29 @@
+[
+  {
+    "model": "BeatBiteBistroapi.customer",
+    "pk": 1,
+    "fields": {
+      "name": "John Doe",
+      "email": "john.doe@example.com",
+      "phone_number": "1234567890"
+    }
+  },
+  {
+    "model": "BeatBiteBistroapi.customer",
+    "pk": 2,
+    "fields": {
+      "name": "Jane Smith",
+      "email": "jane.smith@example.com",
+      "phone_number": "9876543210"
+    }
+  },
+  {
+    "model": "BeatBiteBistroapi.customer",
+    "pk": 3,
+    "fields": {
+      "name": "Bob Johnson",
+      "email": "bob.johnson@example.com",
+      "phone_number": "5551234567"
+    }
+  }
+]

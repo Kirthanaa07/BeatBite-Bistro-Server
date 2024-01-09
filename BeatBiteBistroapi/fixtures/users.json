@@ -1,0 +1,32 @@
+[
+  {
+    "model": "BeatBiteBistroapi.user",
+    "pk": 1,
+    "fields": {
+      "uid": 1,
+      "name": "John Doe",
+      "image": "john_doe.jpg",
+      "role": "Cashier"
+    }
+  },
+  {
+    "model": "BeatBiteBistroapi.user",
+    "pk": 2,
+    "fields": {
+      "uid": 2,
+      "name": "Jane Smith",
+      "image": "jane_smith.png",
+      "role": "Admin"
+    }
+  },
+  {
+    "model": "BeatBiteBistroapi.user",
+    "pk": 3,
+    "fields": {
+      "uid": 3,
+      "name": "Charlie Wilson",
+      "image": "charlie_wilson.png",
+      "role": "Cashier"
+    }
+  }
+]
