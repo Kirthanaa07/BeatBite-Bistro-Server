@@ -18,11 +18,19 @@ from django.urls import path
 from django.conf.urls import include
 from rest_framework import routers
 from BeatBiteBistroapi.views import CustomerView
+from BeatBiteBistroapi.views import ItemView
+from BeatBiteBistroapi.views import OrderItemView
+from BeatBiteBistroapi.views import check_user, register_user, delete_user
 
 router = routers.DefaultRouter(trailing_slash=False)
 router.register(r"customers", CustomerView, "customer")
+router.register(r"items", ItemView, "item")
+router.register(r"order_items", OrderItemView, "order_item")
 
 urlpatterns = [
     path("admin/", admin.site.urls),
-    path('', include(router.urls)),
+    path("", include(router.urls)),
+    path("checkuser", check_user),
+    path("registeruser", register_user),
+    path("deleteuser/<int:user_id>/", delete_user),
 ]

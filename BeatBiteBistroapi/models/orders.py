@@ -1,6 +1,7 @@
 from django.db import models
 from .customers import Customer
 from .user import User
+# from .BeatBiteBistroapi.models.items import Item
 
 class Order(models.Model):
   
@@ -10,4 +11,6 @@ class Order(models.Model):
   payment_type = models.CharField(max_length=50)
   order_type = models.CharField(max_length=50)
   tip_amount = models.IntegerField()
-  status = models.CharField(max_length=5)
+  status = models.CharField(max_length=5) 
+  
+  # item = models.ManyToManyField(Item, through="orderitem", related_name="order")
