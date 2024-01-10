@@ -8,15 +8,28 @@ class CustomerView(ViewSet):
   
   def retrieve(self, request, pk):
     
-    customer = Customer.objects.get(pk=pk)
-    serializer = CustomerSerializer(customer)
+    customers = Customer.objects.get(pk=pk)
+    serializer = CustomerSerializer(customers)
     return Response(serializer.data)
     
     
   def list(self, request):
-    customer = Customer.objects.all()
-    serializer = CustomerSerializer(customer, many=True)
+    customers = Customer.objects.all()
+    serializer = CustomerSerializer(customers, many=True)
     return Response(serializer.data)
+  
+  def create(self, request):
+    
+    customers = Customer.objects.create(
+      name=request.data["name"],
+      email=request.data["email"],
+      phone_number=request.data["phone_number"]
+    )
+    
+    serializer = CustomerSerializer(customers)
+    return Response(serializer.data)
+    
+     
   
 class CustomerSerializer(serializers.ModelSerializer):
   class Meta:

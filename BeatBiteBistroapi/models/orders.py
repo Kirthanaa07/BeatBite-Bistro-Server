@@ -5,8 +5,8 @@ from .user import User
 
 class Order(models.Model):
   
-  uid = models.ForeignKey(User, on_delete=models.CASCADE)
-  customers = models.ForeignKey(Customer, on_delete= models.CASCADE)
+  uid = models.ForeignKey(User, on_delete=models.CASCADE, related_name='orders')
+  customer = models.ForeignKey(Customer, on_delete= models.CASCADE, related_name='orders')
   order_date = models.DateTimeField()
   payment_type = models.CharField(max_length=50)
   order_type = models.CharField(max_length=50)

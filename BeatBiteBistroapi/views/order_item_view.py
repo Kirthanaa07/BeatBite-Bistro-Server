@@ -19,7 +19,18 @@ class OrderItemView(ViewSet):
         serializer = OrderItemSerializer(order_item, many=True)
         return Response(serializer.data)
       
+    def create(self, request):
+    
+      order_item = OrderItem.objects.create(
+        item=request.data["item_id"],
+        order=request.data["order_id"],
+        quantity=request.data["quantity"]
+      )
+      serializer = OrderItemSerializer(order_item)
+      return Response(serializer.data)  
+      
 class OrderItemSerializer(serializers.ModelSerializer):
+  
   class Meta:
     
     model = OrderItem

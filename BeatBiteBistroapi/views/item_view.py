@@ -19,6 +19,15 @@ class ItemView(ViewSet):
     serializer = ItemSerializer(item, many=True)
     return Response(serializer.data)
   
+  def create(self, request):
+    
+    item = Item.objects.create(
+      name=request.data["name"],
+      price=request.data["price"]
+    )
+    serializer = ItemSerializer(item)
+    return Response(serializer.data)
+  
 class ItemSerializer(serializers.ModelSerializer):
   class Meta:
     model = Item
