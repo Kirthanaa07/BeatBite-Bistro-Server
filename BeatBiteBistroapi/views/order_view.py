@@ -34,7 +34,7 @@ class OrderView(ViewSet):
         user_order = User.objects.get(pk=request.data["user_id"])
 
         order = Order.objects.create(
-            order_date=request.data["order_date"],l
+            order_date=request.data["order_date"],
             order_type=request.data["order_type"],
             payment_type=request.data["payment_type"],
             status=request.data["status"],
