@@ -3,6 +3,7 @@ from rest_framework.viewsets import ViewSet
 from rest_framework.response import Response
 from rest_framework import serializers, status
 from BeatBiteBistroapi.models import Customer
+from BeatBiteBistroapi.serializers.all import CustomerSerializer
 
 class CustomerView(ViewSet):
   
@@ -28,11 +29,22 @@ class CustomerView(ViewSet):
     
     serializer = CustomerSerializer(customers)
     return Response(serializer.data)
+  
+  def update(self, request, pk):
     
+    customer = Customer.objects.get(pk=pk)
+    customer.name = request.data["name"]
+    customer.email = request.data["email"]
+    customer.phone_number = request.data["phone_number"]
+    customer.save()
+    
+    return Response(None, status=status.HTTP_204_NO_CONTENT)
+  
+  
+  def destroy(self, request, pk):
+    
+    customer = Customer.objects.get(pk=pk)
+    customer.delete()
+    return Response(None, status=status.HTTP_204_NO_CONTENT) 
      
   
-class CustomerSerializer(serializers.ModelSerializer):
-  class Meta:
-    model = Customer
-    fields = ('id', 'name', 'email', 'phone_number') 
-    depth = 1 

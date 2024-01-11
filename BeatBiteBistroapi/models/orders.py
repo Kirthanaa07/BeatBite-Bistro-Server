@@ -5,7 +5,7 @@ from .user import User
 
 class Order(models.Model):
   
-  uid = models.ForeignKey(User, on_delete=models.CASCADE, related_name='orders')
+  user = models.ForeignKey(User, on_delete=models.CASCADE, related_name='orders')
   customer = models.ForeignKey(Customer, on_delete= models.CASCADE, related_name='orders')
   order_date = models.DateTimeField()
   payment_type = models.CharField(max_length=50)
@@ -13,4 +13,4 @@ class Order(models.Model):
   tip_amount = models.IntegerField()
   status = models.CharField(max_length=5) 
   
-  # item = models.ManyToManyField(Item, through="orderitem", related_name="order")
+  # item = models.ManyToManyField(Item, through="orderitem", related_name="orders")

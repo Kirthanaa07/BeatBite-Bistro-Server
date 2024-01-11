@@ -28,7 +28,17 @@ class ItemView(ViewSet):
     serializer = ItemSerializer(item)
     return Response(serializer.data)
   
-class ItemSerializer(serializers.ModelSerializer):
-  class Meta:
-    model = Item
-    fields = ('id', 'name', 'price')  
+  def update(self, request, pk):
+    
+    item = Item.objects.get(pk=pk)
+    item.name = request.data["name"]
+    item.price = request.data["price"]
+    item.save()
+    
+    return Response(None, status=status.HTTP_204_NO_CONTENT)
+  
+  def destroy(self, request, pk):
+    item = Item.objects.get(pk=pk)
+    item.delete()
+    return Response(None, status=status.HTTP_204_NO_CONTENT)  
+ 
