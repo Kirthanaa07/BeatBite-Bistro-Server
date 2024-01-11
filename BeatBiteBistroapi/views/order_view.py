@@ -3,14 +3,16 @@ from rest_framework.viewsets import ViewSet
 from rest_framework.response import Response
 from rest_framework import serializers, status
 from BeatBiteBistroapi.models import Order, Customer, User
-from BeatBiteBistroapi.serializers.all import OrderWithCustomerAndUserSerializer, OrderSerializer
+from BeatBiteBistroapi.serializers.all import (
+    OrderSerializer,
+)
 
 
 class OrderView(ViewSet):
     def retrieve(self, request, pk):
         try:
             order = Order.objects.get(pk=pk)
-            serializer = OrderWithCustomerAndUserSerializer(order)
+            serializer = OrderSerializer(order)
             return Response(serializer.data)
         except Order.DoesNotExist as ex:
             return Response({"message": ex.args[0]}, status=status.HTTP_404_NOT_FOUND)
@@ -32,7 +34,7 @@ class OrderView(ViewSet):
         user_order = User.objects.get(pk=request.data["user_id"])
 
         order = Order.objects.create(
-            order_date=request.data["order_date"],
+            order_date=request.data["order_date"],l
             order_type=request.data["order_type"],
             payment_type=request.data["payment_type"],
             status=request.data["status"],
@@ -45,28 +47,19 @@ class OrderView(ViewSet):
 
     def update(self, request, pk):
         order = Order.objects.get(pk=pk)
-        
 
-        customer_order = Customer.objects.get(pk=request.data["customer_id"])
-        user_order = User.objects.get(pk=request.data["user_id"])
-        order.order_date = request.data["order_date"],
-        order.order_type = request.data["order_type"],
-        order.payment_type = request.data["payment_type"],
-        order.status = request.data["status"],
-        order.customer = customer_order,
-        order.tip_amount = request.data["tip_amount"],
-        order.user = user_order,
+        order.order_date = request.data["order_date"]
+        order.order_type = request.data["order_type"]
+        order.payment_type = request.data["payment_type"]
+        order.status = request.data["status"]
+        order.tip_amount = request.data["tip_amount"]
         order.save()
-        
+
         serializer = OrderSerializer(order)
         return Response(serializer.data, status=status.HTTP_200_OK)
-    
+
     def destroy(self, request, pk):
-        
         order = Order.objects.get(pk=pk)
         order.delete()
-        
+
         return Response(None, status=status.HTTP_204_NO_CONTENT)
-
-
-

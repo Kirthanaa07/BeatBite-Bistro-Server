@@ -3,6 +3,7 @@ from rest_framework.viewsets import ViewSet
 from rest_framework.response import Response
 from rest_framework import serializers, status
 from BeatBiteBistroapi.models import Item
+from BeatBiteBistroapi.serializers.all import ItemSerializer
 
 class ItemView(ViewSet):
   

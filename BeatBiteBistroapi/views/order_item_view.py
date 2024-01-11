@@ -31,22 +31,17 @@ class OrderItemView(ViewSet):
         return Response(serializer.data)
 
     def update(self, request, pk):
-      
         order_item = OrderItem.objects.get(pk=pk)
 
-        item = Item.objects.get(pk=request.data["item"])
-        order = Order.objects.get(pk=request.data["order"])
-        
-        order_item.item = item
-        order_item.order = order
-        
+        quantity = request.data["quantity"]
+        order_item.quantity = quantity
+
         order_item.save()
-        
+
         return Response(None, status=status.HTTP_204_NO_CONTENT)
-      
+
     def destroy(self, request, pk):
-      
-      order_item = OrderItem.objects.get(pk=pk)
-      order_item.delete()
-      
-      return Response(None, status=status.HTTP_204_NO_CONTENT)  
+        order_item = OrderItem.objects.get(pk=pk)
+        order_item.delete()
+
+        return Response(None, status=status.HTTP_204_NO_CONTENT)

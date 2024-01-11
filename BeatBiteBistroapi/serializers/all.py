@@ -20,16 +20,10 @@ class ItemSerializer(serializers.ModelSerializer):
         model = Item
         fields = ("id", "name", "price")
 
-
-class OrderItemSerializer(serializers.ModelSerializer):
-    class Meta:
-        model = OrderItem
-        fields = ("id", "order", "item", "quantity")
-
-
 class OrderSerializer(serializers.ModelSerializer):
     customer = CustomerSerializer()
     user = UserSerializer()
+    items = ItemSerializer(many=True, read_only=True)
 
     class Meta:
         model = Order
@@ -37,6 +31,7 @@ class OrderSerializer(serializers.ModelSerializer):
             "id",
             "user",
             "customer",
+            "items",
             "order_date",
             "payment_type",
             "order_type",
@@ -44,20 +39,10 @@ class OrderSerializer(serializers.ModelSerializer):
             "status",
         )
 
-
-class OrderWithCustomerAndUserSerializer(serializers.ModelSerializer):
-    customer = CustomerSerializer()
-    user = UserSerializer()
-
+class OrderItemSerializer(serializers.ModelSerializer):
+    order = OrderSerializer()
+    item = ItemSerializer()
+    
     class Meta:
-        model = Order
-        fields = (
-            "id",
-            "user",
-            "customer",
-            "order_date",
-            "order_type",
-            "tip_amount",
-            "status",
-            "payment_type",
-        )
+        model = OrderItem
+        fields = ("id", "order", "item", "quantity")
