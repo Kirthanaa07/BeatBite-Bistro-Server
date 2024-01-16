@@ -30,17 +30,32 @@ class OrderView(ViewSet):
         return Response(serializer.data)
 
     def create(self, request):
-        customer_order = Customer.objects.get(pk=request.data["customer_id"])
-        user_order = User.objects.get(pk=request.data["user_id"])
+        customer_name = request.data["customer_name"]
+        customer_email = request.data["customer_email"]
+        customer_phone = request.data["customer_phone"]
+        # lookup customer by email
+        customer = Customer.objects.get(email=customer_email)
+        if customer is None:
+            customer = Customer.objects.create(
+                name=customer_name,
+                email=customer_email,
+                phone_number=customer_phone,
+            )
+        else:
+            customer.name=customer_name
+            customer.phone_number=customer_phone
+            customer.save()
+
+        user = User.objects.get(pk=request.data["user_id"])
 
         order = Order.objects.create(
-            order_date=request.data["order_date"],
+            user=user,
+            customer=customer,
             order_type=request.data["order_type"],
+            order_date=request.data["order_date"],
             payment_type=request.data["payment_type"],
             status=request.data["status"],
-            customer=customer_order,
             tip_amount=request.data["tip_amount"],
-            user=user_order,
         )
         serializer = OrderSerializer(order)
         return Response(serializer.data, status=status.HTTP_201_CREATED)
