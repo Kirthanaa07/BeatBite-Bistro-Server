@@ -34,7 +34,7 @@ class OrderView(ViewSet):
         customer_email = request.data["customer_email"]
         customer_phone = request.data["customer_phone"]
         # lookup customer by email
-        customer = Customer.objects.get(email=customer_email)
+        customer = Customer.objects.filter(email=customer_email).first()
         if customer is None:
             customer = Customer.objects.create(
                 name=customer_name,
