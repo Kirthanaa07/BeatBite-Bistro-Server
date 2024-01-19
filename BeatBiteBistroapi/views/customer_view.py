@@ -3,23 +3,48 @@ from rest_framework.viewsets import ViewSet
 from rest_framework.response import Response
 from rest_framework import serializers, status
 from BeatBiteBistroapi.models import Customer
+from BeatBiteBistroapi.serializers.all import CustomerSerializer
 
 class CustomerView(ViewSet):
   
   def retrieve(self, request, pk):
     
-    customer = Customer.objects.get(pk=pk)
-    serializer = CustomerSerializer(customer)
+    customers = Customer.objects.get(pk=pk)
+    serializer = CustomerSerializer(customers)
     return Response(serializer.data)
     
     
   def list(self, request):
-    customer = Customer.objects.all()
-    serializer = CustomerSerializer(customer, many=True)
+    customers = Customer.objects.all()
+    serializer = CustomerSerializer(customers, many=True)
     return Response(serializer.data)
   
-class CustomerSerializer(serializers.ModelSerializer):
-  class Meta:
-    model = Customer
-    fields = ('id', 'name', 'email', 'phone_number') 
-    depth = 1 
+  def create(self, request):
+    
+    customers = Customer.objects.create(
+      name=request.data["name"],
+      email=request.data["email"],
+      phone_number=request.data["phone_number"]
+    )
+    
+    serializer = CustomerSerializer(customers)
+    return Response(serializer.data)
+  
+  def update(self, request, pk):
+    
+    customer = Customer.objects.get(pk=pk)
+    customer.name = request.data["name"]
+    customer.email = request.data["email"]
+    customer.phone_number = request.data["phone_number"]
+    customer.save()
+    
+    return Response(None, status=status.HTTP_204_NO_CONTENT)
+  
+  
+  def destroy(self, request, pk):
+    
+    customer = Customer.objects.get(pk=pk)
+    customer.delete()
+    return Response(None, status=status.HTTP_204_NO_CONTENT) 
+     
+  

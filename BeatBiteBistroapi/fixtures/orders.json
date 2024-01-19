@@ -9,7 +9,7 @@
       "tip_amount": 5.0,
       "status": "Closed",
       "customers": 2,
-      "uid": 2
+      "user": 2
     }
   },
   {
@@ -22,7 +22,7 @@
       "tip_amount": 0.0,
       "status": "Open",
       "customers": 1,
-      "uid": 1
+      "user": 1
     }
   },
   {
@@ -35,7 +35,7 @@
       "tip_amount": 8.5,
       "status": "Closed",
       "customers": 3,
-      "uid": 3
+      "user": 3
     }
   }
 ]
