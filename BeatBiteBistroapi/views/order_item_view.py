@@ -23,10 +23,15 @@ class OrderItemView(ViewSet):
     def create(self, request):
         item = Item.objects.get(pk=request.data["item_id"])
         order = Order.objects.get(pk=request.data["order_id"])
-
-        order_item = OrderItem.objects.create(
-            item=item, order=order, quantity=request.data["quantity"]
-        )
+        existingOrderItem = OrderItem.objects.filter(order_id=request.data["order_id"],item_id=request.data["item_id"]).first()
+        
+        if existingOrderItem is None:
+            order_item = OrderItem.objects.create(
+                item=item, order=order, quantity=request.data["quantity"])
+        else:
+            existingOrderItem.quantity = existingOrderItem.quantity + 1
+            existingOrderItem.save()
+            
         serializer = OrderItemSerializer(order_item)
         return Response(serializer.data)
 

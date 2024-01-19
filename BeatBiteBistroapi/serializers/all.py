@@ -42,6 +42,7 @@ class OrderSerializer(serializers.ModelSerializer):
             "customer",
             "items",
             "order_date",
+            "order_close_date",
             "payment_type",
             "order_type",
             "tip_amount",
